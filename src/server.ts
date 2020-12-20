@@ -1,12 +1,15 @@
-import express from "express";
-import routes from "./routes";
-const app = express();
+import express from 'express';
+import routes from './routes';
 
-app.get("/", (req, res) => {
-  return res.json({ message: "Hello GoStack Typescript" });
+const app = express();
+app.use(express.json());
+app.use(routes);
+
+app.get('/', (req, res) => {
+  return res.json({ serverStatus: 'running...' });
 });
 
 app.listen(3333),
   () => {
-    console.log("🚀 launched..");
+    console.log('🚀 launched..');
   };
