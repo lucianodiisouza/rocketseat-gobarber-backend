@@ -6,7 +6,7 @@ const appointmentsRouter = Router();
 const appointmentsRepository = new AppointmentsRepository();
 
 appointmentsRouter.get('/', (req, res) => {
-  const appointments = appointmentsRepository.all;
+  const appointments = appointmentsRepository.all();
 
   return res.json(appointments);
 });
@@ -25,7 +25,7 @@ appointmentsRouter.post('/', (req, res) => {
     });
   }
 
-  const appointment = appointmentsRepository.create(provider, parsedDate);
+  const appointment = appointmentsRepository.create({ provider, date });
 
   return res.json(appointment);
 });
