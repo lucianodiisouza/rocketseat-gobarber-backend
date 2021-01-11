@@ -9,12 +9,12 @@ sessionsRouter.post('/', async (req, res) => {
 
     const authenticateUserService = new AuthenticateUserService();
 
-    const { user } = await authenticateUserService.execute({
+    const { user, token } = await authenticateUserService.execute({
       email,
       password,
     });
 
-    const sessionData = {
+    const data = {
       id: user.id,
       name: user.name,
       email: user.email,
@@ -22,7 +22,7 @@ sessionsRouter.post('/', async (req, res) => {
       updated_at: user.updated_at,
     };
 
-    return res.status(201).json(sessionData);
+    return res.status(201).json({ data, token });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
